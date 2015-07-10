@@ -1,8 +1,8 @@
 Package: snpeffutils
 Title: Utility Functions for Working with SnpEff Data
 Version: 1.0
-Authors@R: person("Fong Chun", "Chan", "fongchunchan@gmail.com", 
-									role = c("aut", "cre"))
+Authors@R: person("Fong Chun", "Chan", email = "fongchunchan@gmail.com", 
+	role = c("aut", "cre"))
 Description: This R packages provides some utility functions to manipulate some
 	of the output files from SnpEff
 Depends: R (>= 3.1.2)
