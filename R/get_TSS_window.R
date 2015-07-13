@@ -41,6 +41,4 @@ get_TSS_window <- function(snpeff.dt, upstream.len = 0, downstream.len = 2000) {
   tss.window <- dplyr::select_(tss.window, 
                                .dots = list(~chr, ~upstream, 
                                             ~downstream, ~geneName, ~strand))
-tss.window %>%
-  mutate(test = downstream - upstream)
 }
