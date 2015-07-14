@@ -32,6 +32,6 @@ For instance, if gene A is on the - strand then the downstream.len applies
 be less than the TSS site).
 The final upstream and downstream coordinate columns are reported from a 5'
 respect regardless of what strand the gene is one (similar to how gene
-coordinates reported in general).
+coordinates reported in general). The window includes the TSS in its range.
 }
 

@@ -11,8 +11,8 @@
 #
 #' The final upstream and downstream coordinate columns are reported from a 5' 
 #' respect regardless of what strand the gene is one (similar to how gene 
-#' coordinates reported in general).
-#' 
+#' coordinates reported in general). The window includes the TSS in its range.
+#
 #' @param snpeff.dt SnpEff database dump data.table loaded through the 
 #'        load_snpeff_db_dump() function.
 #' @param upstream.len Integer value indicating the number of bases to include 
@@ -29,13 +29,18 @@ get_TSS_window <- function(snpeff.dt, upstream.len = 0, downstream.len = 2000) {
     dplyr::filter_(snpeff.dt, .dots = list(~type == "Gene"))
 
   varval <- list()
-  varval[["upstream"]] <- lazyeval::interp(~f(strand == 1, start - upstream.len,
-                                  f(strand == -1, end - downstream.len, NA)),
-                                  .values = list(f = as.name("ifelse")))
 
-  varval[["downstream"]] <- lazyeval::interp(~f(strand == 1, start + downstream.len,
-                                  f(strand == -1, end + upstream.len, NA)),
-                                  .values = list(f = as.name("ifelse")))
+  varval[["downstream"]] <- lazyeval::interp(
+                              ~f(strand == 1, start + downstream.len,
+                               f(strand == -1, end + upstream.len, NA)),
+                              .values = list(f = as.name("ifelse"))
+                            )
+
+  varval[["upstream"]] <- lazyeval::interp(
+                            ~f(strand == 1, start - upstream.len,
+                             f(strand == -1, end - downstream.len, NA)),
+                             .values = list(f = as.name("ifelse"))
+                          )
 
   tss.window <- dplyr::mutate_(snpeff.dt.filter, .dots = varval)
 
