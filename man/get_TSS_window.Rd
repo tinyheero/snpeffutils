@@ -2,35 +2,36 @@
 % Please edit documentation in R/get_TSS_window.R
 \name{get_TSS_window}
 \alias{get_TSS_window}
-\title{Return the interval}
+\title{Return the interval.}
 \usage{
 get_TSS_window(snpeff.dt, upstream.len = 0, downstream.len = 2000)
 }
 \arguments{
 \item{snpeff.dt}{SnpEff database dump data.table loaded through the
-load_snpeff_db_dump() function}
+load_snpeff_db_dump() function.}
 
 \item{upstream.len}{Integer value indicating the number of bases to include
 upstream of the transcription start site.}
 
 \item{downstream.len}{Integer value indicating the number of bases to include
-       downstream of the transcription start site}
+       downstream of the transcription start site.}
 }
 \value{
-A data.table of contain the chr, upstream, downstream, and geneName
-        of the around the TSS region
+A data.table of containing the chr, upstream, downstream, and
+        geneName of the around the TSS region.
 }
 \description{
-This function will return a window of upstream and downstream
-of every transcription start site in the snpeff.dt.
+This function will return a window that is upstream and downstream
+of every transcription start site in the snpeff.dt object.
 }
 \details{
 This function takes into account the strand the gene is on. So a
 downstream.len will apply to strand directionality the gene is.
 For instance, if gene A is on the - strand then the downstream.len applies
-to the end coordinate of the gene.
-The upstream and downstream coordinate columns are reported from a 5'
+"upstream" to the end coordinate of the gene (i.e. final downstream will
+be less than the TSS site).
+The final upstream and downstream coordinate columns are reported from a 5'
 respect regardless of what strand the gene is one (similar to how gene
-coordinates reported in general)
+coordinates reported in general).
 }
 
