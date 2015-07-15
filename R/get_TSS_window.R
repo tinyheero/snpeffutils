@@ -19,9 +19,9 @@
 #'        upstream of the transcription start site.
 #' @param downstream.len Integer value indicating the number of bases to include 
 #'        downstream of the transcription start site.
-#'        
-#' @return A data.table of containing the chr, upstream, downstream, and 
-#'         geneName of the around the TSS region.
+#' @return A data.table of containing the upstream and downstream around the
+#'         TSS. Additionally, the chr, geneName, geneID, and strand the window 
+#'         is associated with.
 #' @export
 get_TSS_window <- function(snpeff.dt, upstream.len = 0, downstream.len = 2000) {
 
@@ -46,5 +46,5 @@ get_TSS_window <- function(snpeff.dt, upstream.len = 0, downstream.len = 2000) {
 
   tss.window <- dplyr::select_(tss.window, 
                                .dots = list(~chr, ~upstream, 
-                                            ~downstream, ~geneName, ~strand))
+                                            ~downstream, ~geneName, ~id, ~strand))
 }
